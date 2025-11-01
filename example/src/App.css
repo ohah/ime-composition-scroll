@@ -1,0 +1,121 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.app-header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.content {
+  min-height: 60vh;
+}
+
+/* 공통 스타일은 pages.css와 pages 컴포넌트에서 관리 */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.contenteditable-div {
+  min-height: 100px;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: text;
+  transition: border-color 0.3s;
+}
+
+.contenteditable-div:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.form-group button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.form-group button:hover {
+  background: #2980b9;
+}
+
+.list-item {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.list-item input {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}
+
+.list-item button {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 0;
+}
+
+.list-item button:hover {
+  background: #c0392b;
+}
+

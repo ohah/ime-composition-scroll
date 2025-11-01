@@ -1,0 +1,54 @@
+{
+  "name": "ime-composition-scroll",
+  "version": "0.0.0",
+  "private": true,
+  "description": "IME Composition Scroll Monorepo",
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:e2e": "playwright test",
+    "postinstall": "pnpm exec playwright install --with-deps",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,jsx,json,md}\"",
+    "dev": "pnpm --filter ime-composition-scroll-docs dev",
+    "example:dev": "pnpm --filter ime-composition-scroll-example dev",
+    "docs:dev": "pnpm --filter ime-composition-scroll-docs dev",
+    "docs:build": "pnpm --filter ime-composition-scroll-docs build",
+    "docs:preview": "pnpm --filter ime-composition-scroll-docs preview",
+    "clean": "pnpm -r clean",
+    "type-check": "pnpm -r type-check"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@testing-library/react": "latest",
+    "@testing-library/jest-dom": "latest",
+    "jsdom": "latest",
+    "prettier": "latest",
+    "typescript": "latest",
+    "vitest": "latest",
+    "oxlint": "latest"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@10.19.0",
+  "keywords": [
+    "ime",
+    "composition",
+    "scroll",
+    "input-method-editor"
+  ],
+  "author": "ohah",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ohah/ime-composition-scroll.git"
+  }
+}

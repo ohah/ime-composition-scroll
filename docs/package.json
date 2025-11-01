@@ -1,0 +1,29 @@
+{
+  "name": "ime-composition-scroll-docs",
+  "version": "0.0.0",
+  "private": true,
+  "description": "IME Composition Scroll Documentation",
+  "type": "module",
+  "scripts": {
+    "dev": "rspress dev",
+    "build": "rspress build",
+    "preview": "rspress preview",
+    "clean": "rm -rf doc_build"
+  },
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest",
+    "rspress": "latest"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "ime",
+    "composition",
+    "scroll",
+    "documentation",
+    "rspress"
+  ],
+  "author": "IME Composition Scroll Team",
+  "license": "MIT"
+}
+

@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+doc_build
+.DS_Store
+*.log
+.idea
+coverage
+*.tsbuildinfo
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+

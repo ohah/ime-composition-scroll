@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/crates/oxc_linter/src/schemas/oxlintrc.schema.json",
+  "rules": {
+    "correctness": "warn",
+    "suspicious": "warn",
+    "perf": "warn",
+    "style": "warn",
+    "pedantic": "off",
+    "nursery": "off",
+    "restriction": "off"
+  }
+}

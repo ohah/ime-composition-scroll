@@ -1,0 +1,55 @@
+{
+  "name": "ime-composition-scroll",
+  "version": "0.1.0",
+  "description": "IME composition scroll utility library",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib dev",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui",
+    "test:e2e": "playwright test",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "prettier --write \"**/*.{js,ts,tsx,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,tsx,jsx,json,md}\"",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "ime",
+    "composition",
+    "scroll",
+    "input-method-editor"
+  ],
+  "author": "ohah",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ohah/ime-composition-scroll.git"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@vitejs/plugin-react": "latest",
+    "@playwright/test": "latest",
+    "jsdom": "latest",
+    "@rslib/core": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  }
+}
