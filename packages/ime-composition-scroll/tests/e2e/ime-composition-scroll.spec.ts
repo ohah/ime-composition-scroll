@@ -48,7 +48,7 @@ test.describe("IME Composition Scroll", () => {
             const input = document.getElementById('test-input');
             const output = document.getElementById('output');
             
-            const imeScroll = createIMECompositionScroll({ container });
+            const imeScroll = createIMECompositionScroll({ container, forceEnable: true });
             
             let eventLog = [];
             
@@ -145,5 +145,303 @@ test.describe("IME Composition Scroll", () => {
     const clientHeight = await container.evaluate((el) => el.clientHeight);
 
     expect(scrollHeight).toBeGreaterThan(clientHeight);
+  });
+});
+
+test.describe("MutationObserver - 입력 요소 감지", () => {
+  test("should detect input elements using MutationObserver", async ({
+    page,
+  }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            window.imeScroll = createIMECompositionScroll({ forceEnable: true });
+            window.detectedElements = new Set();
+            
+            // MutationObserver가 감지하는지 확인하기 위한 콜백
+            setTimeout(() => {
+              window.imeScroll.startObserving();
+              
+              // 초기 스캔 결과 확인
+              const initialCount = window.imeScroll.observedElements?.size || 0;
+              window.detectedElements.add('initial:' + initialCount);
+            }, 100);
+          </script>
+        </head>
+        <body>
+          <input type="text" id="text-input" />
+          <textarea id="textarea-input"></textarea>
+          <div contenteditable="true" id="editable-div"></div>
+        </body>
+      </html>
+    `);
+
+    // 초기 스캔이 완료될 때까지 대기
+    await page.waitForTimeout(200);
+
+    const detectedCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // 3개의 입력 요소가 감지되어야 함
+    expect(detectedCount).toBeGreaterThanOrEqual(3);
+  });
+
+  test("should detect dynamically added input elements", async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            window.imeScroll = createIMECompositionScroll({ forceEnable: true });
+            window.imeScroll.startObserving();
+            
+            // 동적으로 요소 추가
+            setTimeout(() => {
+              const container = document.body;
+              
+              const newInput = document.createElement('input');
+              newInput.type = 'text';
+              newInput.id = 'dynamic-input';
+              container.appendChild(newInput);
+              
+              const newTextarea = document.createElement('textarea');
+              newTextarea.id = 'dynamic-textarea';
+              container.appendChild(newTextarea);
+              
+              const newEditable = document.createElement('div');
+              newEditable.contentEditable = 'true';
+              newEditable.id = 'dynamic-editable';
+              container.appendChild(newEditable);
+            }, 100);
+          </script>
+        </head>
+        <body>
+          <input type="text" id="initial-input" />
+        </body>
+      </html>
+    `);
+
+    // 동적 요소 추가 후 MutationObserver가 감지할 때까지 대기
+    await page.waitForTimeout(300);
+
+    const detectedCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // 초기 1개 + 동적 추가 3개 = 최소 4개 이상 감지되어야 함
+    expect(detectedCount).toBeGreaterThanOrEqual(4);
+
+    // 동적으로 추가된 요소들이 실제로 존재하는지 확인
+    const dynamicInput = page.locator("#dynamic-input");
+    const dynamicTextarea = page.locator("#dynamic-textarea");
+    const dynamicEditable = page.locator("#dynamic-editable");
+
+    await expect(dynamicInput).toBeVisible();
+    await expect(dynamicTextarea).toBeVisible();
+    await expect(dynamicEditable).toBeVisible();
+  });
+
+  test("should detect contenteditable attribute changes", async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            window.imeScroll = createIMECompositionScroll({ forceEnable: true });
+            window.imeScroll.startObserving();
+          </script>
+        </head>
+        <body>
+          <div id="editable-div">Editable content</div>
+        </body>
+      </html>
+    `);
+
+    // 초기 상태 (contenteditable이 없음)
+    await page.waitForTimeout(100);
+    const initialCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // contenteditable 속성 추가
+    await page.evaluate(() => {
+      const div = document.getElementById("editable-div");
+      if (div) {
+        div.contentEditable = "true";
+      }
+    });
+
+    // MutationObserver가 속성 변경을 감지할 때까지 대기
+    await page.waitForTimeout(200);
+
+    const afterChangeCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // contenteditable이 추가되면 요소가 감지되어야 함
+    expect(afterChangeCount).toBeGreaterThan(initialCount);
+  });
+
+  test("should automatically initialize on DOMContentLoaded", async ({
+    page,
+  }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            // DOMContentLoaded 이벤트를 기다리지 않고 즉시 인스턴스 생성
+            window.imeScroll = createIMECompositionScroll({ forceEnable: true });
+            window.initTime = Date.now();
+          </script>
+        </head>
+        <body>
+          <input type="text" id="test-input" />
+          <textarea id="test-textarea"></textarea>
+        </body>
+      </html>
+    `);
+
+    // DOMContentLoaded 후 자동 초기화가 완료될 때까지 대기
+    await page.waitForTimeout(200);
+
+    const isObserving = await page.evaluate(() => {
+      return (window as any).imeScroll?.isObserving() || false;
+    });
+
+    const detectedCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // MutationObserver가 시작되었는지 확인
+    expect(isObserving).toBe(true);
+    // 최소 2개의 입력 요소가 감지되어야 함
+    expect(detectedCount).toBeGreaterThanOrEqual(2);
+  });
+
+  test("should detect various input element types", async ({ page }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            window.imeScroll = createIMECompositionScroll({ forceEnable: true });
+            window.imeScroll.startObserving();
+          </script>
+        </head>
+        <body>
+          <input type="text" id="text-input" />
+          <input type="email" id="email-input" />
+          <input id="default-input" />
+          <textarea id="textarea-input"></textarea>
+          <div contenteditable="true" id="editable-div"></div>
+        </body>
+      </html>
+    `);
+
+    await page.waitForTimeout(200);
+
+    const detectedCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // text input, default input (text), textarea, contenteditable = 4개 감지
+    // email input은 감지되지 않아야 함
+    expect(detectedCount).toBe(4);
+  });
+
+  test("should handle debug mode with console logs", async ({ page }) => {
+    const consoleMessages: string[] = [];
+
+    page.on("console", (msg) => {
+      const text = msg.text();
+      if (text.includes("[IMECompositionScroll]")) {
+        consoleMessages.push(text);
+      }
+    });
+
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            window.imeScroll = createIMECompositionScroll({ debug: true });
+            window.imeScroll.startObserving();
+          </script>
+        </head>
+        <body>
+          <input type="text" id="test-input" />
+        </body>
+      </html>
+    `);
+
+    await page.waitForTimeout(200);
+
+    // 디버그 모드일 때 콘솔 로그가 출력되어야 함
+    expect(consoleMessages.length).toBeGreaterThan(0);
+    expect(consoleMessages.some((msg) => msg.includes("초기 스캔"))).toBe(true);
+  });
+
+  test("should remove elements from tracking when removed from DOM", async ({
+    page,
+  }) => {
+    await page.setContent(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <script type="module">
+            import { createIMECompositionScroll } from '../../dist/index.js';
+            
+            window.imeScroll = createIMECompositionScroll({ forceEnable: true });
+            window.imeScroll.startObserving();
+          </script>
+        </head>
+        <body>
+          <div id="container">
+            <input type="text" id="input1" />
+            <textarea id="textarea1"></textarea>
+          </div>
+        </body>
+      </html>
+    `);
+
+    await page.waitForTimeout(200);
+
+    const initialCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+    expect(initialCount).toBeGreaterThanOrEqual(2);
+
+    // 요소 제거
+    await page.evaluate(() => {
+      const container = document.getElementById("container");
+      if (container) {
+        container.remove();
+      }
+    });
+
+    await page.waitForTimeout(200);
+
+    const afterRemoveCount = await page.evaluate(() => {
+      return (window as any).imeScroll?.getObservedElementsCount() || 0;
+    });
+
+    // 제거된 요소들이 추적에서 제외되어야 함
+    expect(afterRemoveCount).toBeLessThan(initialCount);
   });
 });

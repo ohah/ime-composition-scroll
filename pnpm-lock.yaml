@@ -56,7 +56,7 @@ importers:
 
   example:
     dependencies:
-      ime-composition-scroll:
+      '@ohah/ime-composition-scroll':
         specifier: workspace:*
         version: link:../packages/ime-composition-scroll
       react:

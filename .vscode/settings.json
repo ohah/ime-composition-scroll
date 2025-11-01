@@ -22,20 +22,6 @@
     }
   },
 
-  // 파일 관련 설정
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/build": true,
-    "**/doc_build": true,
-    "**/coverage": true,
-    "**/test-results": true,
-    "**/playwright-report": true,
-    "**/playwright/.cache": true
-  },
-
   // 검색 제외 설정
   "search.exclude": {
     "**/node_modules": true,
