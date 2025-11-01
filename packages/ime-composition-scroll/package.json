@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "rslib build",
-    "dev": "rslib dev",
+    "dev": "rslib build --watch",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "test:ui": "vitest --ui",
