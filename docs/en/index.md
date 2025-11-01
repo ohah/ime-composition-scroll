@@ -9,11 +9,11 @@ IME composition scroll utility library.
 ## Getting Started
 
 ```bash
-npm install ime-composition-scroll
+npm install @ohah/ime-composition-scroll
 ```
 
 ```typescript
-import { createIMECompositionScroll } from 'ime-composition-scroll';
+import { createIMECompositionScroll } from '@ohah/ime-composition-scroll';
 
 const scroll = createIMECompositionScroll({
   container: document.querySelector('.container'),

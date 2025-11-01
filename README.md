@@ -5,17 +5,15 @@ IME composition scroll 유틸리티 라이브러리입니다.
 ## 설치
 
 ```bash
-npm install ime-composition-scroll
+npm install @ohah/ime-composition-scroll
+pnpm add @ohah/ime-composition-scroll
+yarn add @ohah/ime-composition-scroll
 ```
 
 ## 사용법
 
 ```typescript
-import { createIMECompositionScroll } from 'ime-composition-scroll';
-
-const scroll = createIMECompositionScroll({
-  container: document.querySelector('.container'),
-});
+import "@ohah/ime-composition-scroll";
 ```
 
 ## 개발
@@ -37,4 +35,3 @@ pnpm docs:dev
 ## 라이선스
 
 MIT
-

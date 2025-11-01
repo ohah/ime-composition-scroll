@@ -1,5 +1,5 @@
 {
-  "name": "ime-composition-scroll",
+  "name": "@ohah/ime-composition-scroll",
   "version": "0.1.0",
   "description": "IME composition scroll utility library",
   "type": "module",

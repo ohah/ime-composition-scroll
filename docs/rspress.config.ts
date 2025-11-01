@@ -2,7 +2,8 @@ import { defineConfig } from "rspress/config";
 
 export default defineConfig({
   root: ".",
-  base: process.env.NODE_ENV === "production" ? "/ime-composition-scroll/" : "/",
+  base:
+    process.env.NODE_ENV === "production" ? "/ime-composition-scroll/" : "/",
   title: "IME Composition Scroll",
   description: "IME composition scroll utility library",
   lang: "ko",
@@ -35,10 +36,6 @@ export default defineConfig({
             text: "가이드",
             link: "/guide/",
           },
-          {
-            text: "API",
-            link: "/api/",
-          },
         ],
       },
       {
@@ -51,10 +48,6 @@ export default defineConfig({
           {
             text: "Guide",
             link: "/en/guide/",
-          },
-          {
-            text: "API",
-            link: "/en/api/",
           },
         ],
       },
@@ -97,28 +90,6 @@ export default defineConfig({
           ],
         },
       ],
-      "/api/": [
-        {
-          text: "API",
-          items: [
-            {
-              text: "API 레퍼런스",
-              link: "/api/",
-            },
-          ],
-        },
-      ],
-      "/en/api/": [
-        {
-          text: "API",
-          items: [
-            {
-              text: "API Reference",
-              link: "/en/api/",
-            },
-          ],
-        },
-      ],
     },
   },
   builderConfig: {
@@ -134,4 +105,3 @@ export default defineConfig({
     },
   },
 });
-

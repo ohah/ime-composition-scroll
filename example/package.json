@@ -14,7 +14,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
-    "ime-composition-scroll": "workspace:*"
+    "@ohah/ime-composition-scroll": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "latest",
