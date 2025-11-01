@@ -4,11 +4,29 @@ import '../pages.css';
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
+  const [topContentEditable, setTopContentEditable] = useState('상단 ContentEditable 필드입니다. 여기에 입력해보세요...');
 
   return (
     <div className="page">
       <h2>홈 페이지</h2>
       <p>이 페이지에는 기본 입력 필드들이 있습니다. 스크롤 테스트를 위해 긴 컨텐츠를 포함합니다.</p>
+
+      <div className="form-group">
+        <label htmlFor="home-top-editable">상단 ContentEditable 필드:</label>
+        <div
+          id="home-top-editable"
+          contentEditable
+          className="contenteditable-div"
+          suppressContentEditableWarning
+          onInput={(e) => {
+            const target = e.currentTarget;
+            setTopContentEditable(target.textContent || '');
+          }}
+        >
+          {topContentEditable}
+        </div>
+        <p className="help-text">이 필드는 페이지 상단에 위치합니다. 한글 입력을 테스트해보세요.</p>
+      </div>
 
       <div className="form-group">
         <label htmlFor="home-input">상단 Input 필드:</label>

@@ -4,12 +4,30 @@ import '../pages.css';
 export default function About() {
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
+  const [topContentEditable, setTopContentEditable] = useState('상단 ContentEditable 필드입니다. 여기에 입력해보세요...');
   const [contentEditable, setContentEditable] = useState('이 영역을 편집할 수 있습니다...');
 
   return (
     <div className="page">
       <h2>소개 페이지</h2>
       <p>이 페이지에는 소개 관련 입력 필드들이 있습니다. 스크롤 테스트를 위한 긴 컨텐츠를 포함합니다.</p>
+
+      <div className="form-group">
+        <label htmlFor="about-top-editable">상단 ContentEditable 필드:</label>
+        <div
+          id="about-top-editable"
+          contentEditable
+          className="contenteditable-div"
+          suppressContentEditableWarning
+          onInput={(e) => {
+            const target = e.currentTarget;
+            setTopContentEditable(target.textContent || '');
+          }}
+        >
+          {topContentEditable}
+        </div>
+        <p className="help-text">이 필드는 페이지 상단에 위치합니다. 한글 입력을 테스트해보세요.</p>
+      </div>
 
       <div className="form-group">
         <label htmlFor="about-name">이름 (상단):</label>
