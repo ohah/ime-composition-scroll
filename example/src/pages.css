@@ -31,6 +31,11 @@
 
 .page .form-group input[type="text"],
 .page .form-group input[type="email"],
+.page .form-group input[type="search"],
+.page .form-group input[type="tel"],
+.page .form-group input[type="url"],
+.page .form-group input[type="password"],
+.page .form-group input:not([type]),
 .page .form-group textarea {
   width: 100%;
   padding: 0.75rem;
@@ -43,6 +48,11 @@
 
 .page .form-group input[type="text"]:focus,
 .page .form-group input[type="email"]:focus,
+.page .form-group input[type="search"]:focus,
+.page .form-group input[type="tel"]:focus,
+.page .form-group input[type="url"]:focus,
+.page .form-group input[type="password"]:focus,
+.page .form-group input:not([type]):focus,
 .page .form-group textarea:focus {
   outline: none;
   border-color: #3498db;
