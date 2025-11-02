@@ -40,6 +40,42 @@ export default function Contact() {
         />
       </div>
 
+      <div className="form-group">
+        <label htmlFor="contact-tel">전화번호:</label>
+        <input
+          id="contact-tel"
+          type="tel"
+          placeholder="전화번호를 입력하세요..."
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="contact-search">검색:</label>
+        <input
+          id="contact-search"
+          type="search"
+          placeholder="검색어를 입력하세요..."
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="contact-url">웹사이트:</label>
+        <input
+          id="contact-url"
+          type="url"
+          placeholder="https://example.com"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="contact-password">비밀번호:</label>
+        <input
+          id="contact-password"
+          type="password"
+          placeholder="비밀번호를 입력하세요..."
+        />
+      </div>
+
       <div className="long-content">
         <h3>연락 방법</h3>
         <p>

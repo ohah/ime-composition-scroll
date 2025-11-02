@@ -39,6 +39,51 @@ export default function Home() {
         />
       </div>
 
+      <div className="form-group">
+        <label htmlFor="home-search">Search 필드:</label>
+        <input
+          id="home-search"
+          type="search"
+          placeholder="검색어를 입력하세요..."
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="home-tel">전화번호 (Tel) 필드:</label>
+        <input
+          id="home-tel"
+          type="tel"
+          placeholder="전화번호를 입력하세요..."
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="home-url">URL 필드:</label>
+        <input
+          id="home-url"
+          type="url"
+          placeholder="https://example.com"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="home-email">이메일 필드:</label>
+        <input
+          id="home-email"
+          type="email"
+          placeholder="your@email.com"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="home-password">비밀번호 필드:</label>
+        <input
+          id="home-password"
+          type="password"
+          placeholder="비밀번호를 입력하세요..."
+        />
+      </div>
+
       <div className="long-content">
         <h3>긴 컨텐츠 섹션 1</h3>
         <p>

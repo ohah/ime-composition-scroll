@@ -40,6 +40,51 @@ export default function About() {
         />
       </div>
 
+      <div className="form-group">
+        <label htmlFor="about-search">검색 필드:</label>
+        <input
+          id="about-search"
+          type="search"
+          placeholder="검색어를 입력하세요..."
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="about-tel">연락처:</label>
+        <input
+          id="about-tel"
+          type="tel"
+          placeholder="전화번호를 입력하세요..."
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="about-email">이메일:</label>
+        <input
+          id="about-email"
+          type="email"
+          placeholder="your@email.com"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="about-url">웹사이트:</label>
+        <input
+          id="about-url"
+          type="url"
+          placeholder="https://example.com"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="about-password">비밀번호:</label>
+        <input
+          id="about-password"
+          type="password"
+          placeholder="비밀번호를 입력하세요..."
+        />
+      </div>
+
       <div className="long-content">
         <h3>프로필 정보</h3>
         <p>
