@@ -42,11 +42,27 @@ function isInputElement(element: Element): boolean {
     return true;
   }
 
-  // input 요소 (type이 text이거나 type 속성이 없는 경우)
+  // input 요소 (한글 입력이 가능한 타입들)
   if (tagName === "input") {
     const inputElement = element as HTMLInputElement;
     const type = inputElement.type?.toLowerCase();
-    return !type || type === "text";
+
+    // type 속성이 없으면 기본값인 text로 간주
+    if (!type) {
+      return true;
+    }
+
+    // 한글 입력이 가능한 input 타입들
+    const textInputTypes = [
+      "text",
+      "search",
+      "tel",
+      "url",
+      "email",
+      "password",
+    ];
+
+    return textInputTypes.includes(type);
   }
 
   // contenteditable 요소
@@ -247,6 +263,7 @@ export class IMECompositionScroll {
       }
     });
 
+    console.log(this.observedElements);
     this.logDebug(`현재 추적 중인 입력 요소 수: ${this.observedElements.size}`);
   }
 
