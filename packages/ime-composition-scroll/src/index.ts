@@ -263,7 +263,6 @@ export class IMECompositionScroll {
       }
     });
 
-    console.log(this.observedElements);
     this.logDebug(`현재 추적 중인 입력 요소 수: ${this.observedElements.size}`);
   }
 
