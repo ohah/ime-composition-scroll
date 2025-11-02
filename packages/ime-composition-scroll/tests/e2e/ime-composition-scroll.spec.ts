@@ -345,9 +345,16 @@ test.describe("MutationObserver - 입력 요소 감지", () => {
         <body>
           <input type="text" id="text-input" />
           <input type="email" id="email-input" />
+          <input type="search" id="search-input" />
+          <input type="tel" id="tel-input" />
+          <input type="url" id="url-input" />
+          <input type="password" id="password-input" />
           <input id="default-input" />
           <textarea id="textarea-input"></textarea>
           <div contenteditable="true" id="editable-div"></div>
+          <input type="number" id="number-input" />
+          <input type="date" id="date-input" />
+          <input type="checkbox" id="checkbox-input" />
         </body>
       </html>
     `);
@@ -358,9 +365,9 @@ test.describe("MutationObserver - 입력 요소 감지", () => {
       return (window as any).imeScroll?.getObservedElementsCount() || 0;
     });
 
-    // text input, default input (text), textarea, contenteditable = 4개 감지
-    // email input은 감지되지 않아야 함
-    expect(detectedCount).toBe(4);
+    // text, email, search, tel, url, password, default (text), textarea, contenteditable = 9개 감지
+    // number, date, checkbox는 감지되지 않아야 함
+    expect(detectedCount).toBe(9);
   });
 
   test("should handle debug mode with console logs", async ({ page }) => {
